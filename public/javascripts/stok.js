@@ -15,13 +15,14 @@ function closeModal() {
 
 // Tambahkan event listener pada setiap ikon plus-circle
 openIcons.forEach(icon => {
-    icon.addEventListener('click', openModal);
+    icon.addEventListener('click', () => {openModal(icon.id)});
 });
 
 // Tambahkan event listener pada tombol close untuk menutup modal
 closeFormButton.addEventListener('click', closeModal);
 
-function openModal() {
+function openModal(id) {
+    modalForm.querySelector(`input[type="hidden"]`).value = id
     modalForm.classList.add('show');
 }
 

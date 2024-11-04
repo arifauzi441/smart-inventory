@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Stock</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/stok.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav_header">
+        <div class="nav_logo">
+            <a href="/">
+            <img src="/images/logo.png" alt="logo" />
+            </a>
+            <span class="judul">VendorVault </span>
+            <div class="separator"></div>
+            <div class="notif"><a href="/supplier/low-stock">
+                <% if (notification === "not available") { %>
+                    <i class='bx bx-bell'></i>
+                <% } %>
+                <% if (notification === "available") { %>
+                    <i class='bx bxs-bell-ring bx-tada' ></i>
+                <% } %>
+            </a></div>
+            <div class="dash"><a href="/supplier/dashboard">Dashboard</a></div>
+            <div class="List"><a href="/supplier/product">List Barang</a></div>
+        </div>
+        </div>
+        <ul class="nav_links">
+        <li>Supplier</li>
+        <li><a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        </ul>
+    </nav>
+    
+    
+    <div class="card">
+
+        <section class="cont-stok" id="modalForm">
+            <form class="f-stok" action="/supplier/update-stock" method="post">
+                <div class="jdl">
+                    <span>Input Stok</span>
+                    <a type="button" class="close-form" id="closeForm" title="Close">X</a>
+                </div>
+                <input type="hidden" name="product_id">
+                <div class="hr-horizontal"></div>
+                <div class="deks">
+                    <input type="number" min="1" placeholder="Jumlah Stok" name="product_stock"></input>
+                </div>
+                <div class="kirim">
+                    <button type="submit">Simpan</button>
+                </div>
+            </form>
+        </section>
+
+
+        <div class="card-body card-color">
+            <h5 class="card-title">List Barang</h5>
+            <div class="hr-horizontal"></div>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" id="searchInput" placeholder="Search.." />
+                </div>
+                
+                <div class="info-barang">
+                    <button><i class='bx bx-plus'></i><a style="color: black; text-decoration: none;" href="/supplier/input-product">Tambah Barang</a></button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Harga Barang</th>
+                        <th scope="col">Jumlah Stok</th>
+                        <th scope="col">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% for( let i = 0; i < product.length; i++ ) { %>
+                        <tr>
+                            <td><%= product[i].product_id %></td>
+                            <td><%= product[i].product_name %></td>
+                            <td><%= product[i].product_price %></td>
+                            <td><%= product[i].product_stock %></td>
+                            <td><a href="/supplier/edit-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-edit'></i></a>
+                                <a href="/supplier/delete-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-trash'></i></a>
+                                <a id="<%= product[i].product_id %>" class="edit plus-icon"><i class='bx bx-plus-circle'></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/javascripts/stok.js"></script>
+
+</body>
+</html>

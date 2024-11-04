@@ -17,7 +17,7 @@
     <nav>
       <div class="nav__header">
         <div class="nav__logo">
-          <a href="#">
+          <a href="/">
             <img src="/images/logo.png" alt="logo" />
             <span>VendorVault </span>
           </a>
@@ -28,13 +28,20 @@
       </div>
       <ul class="nav__links" id="nav-links">
         <li>
-          <a href=""><i class='bx bx-bell'></i></a>
-          <a href="#">Dashboard</a>
-          <a href="#">List Barang</a>
+          <a href="/supplier/low-stock">
+            <% if (notification === "not available") { %>
+                <i class='bx bx-bell'></i>
+            <% } %>
+            <% if (notification === "available") { %>
+                <i class='bx bxs-bell-ring bx-tada' ></i>
+            <% } %>
+        </a>
+        <a href="/supplier/dashboard">Dashboard</a>
+          <a href="/supplier/product">List Barang</a>
         </li>
         <li>
           <span>Supplier</span>
-          <a href=""><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a>
+          <a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a>
         </li>
       </ul>
     </nav>
