@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Barang</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/barang.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+</head>
+<body>
+    
+    <nav>
+        <div class="nav_header">
+        <div class="nav_logo">
+            <a href="/">
+            <img src="/images/logo.png" alt="logo" />
+            </a>
+            <span class="judul">VendorVault </span>
+            <div class="separator"></div>
+            <a href="/supplier/low-stock">
+                <% if (notification === "not available") { %>
+                    <i class='bx bx-bell'></i>
+                <% } %>
+                <% if (notification === "available") { %>
+                    <i class='bx bxs-bell-ring bx-tada' ></i>
+                <% } %>
+            </a>
+            <div class="dash"><a href="/supplier/dashboard">Dashboard</a></div>
+            <div class="List"><a href="/supplier/product">List Barang</a></div>
+        </div>
+        </div>
+        <ul class="nav_links">
+        <li>Supplier</li>
+        <li><a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="card">
+
+        <section class="cont-stok">
+            <form class="f-stok" method="post" action="/supplier/update-product/<%= product.product_id %>">
+                <div class="jdl">
+                    <span>Input Barang</span>
+                </div>
+                <div class="hr-horizontal"></div>
+
+                <div class="nama">
+                    <input placeholder="Nama Barang" name="product_name" value="<%= product.product_name %>">
+                </div>
+                <div class="harga">
+                    <input type="number" placeholder="Harga Barang" name="product_price" value="<%= product.product_price %>">
+                </div>
+                <div class="Jumlah">
+                    <input type="number" placeholder="Jumlah Stok" name="product_stock" value="<%= product.product_stock %>">
+                </div>
+                <div class="kirim">
+                    <button type="submit">Simpan</button>
+                </div>
+            </form>
+        </section>
+        
+    </div>
+</body>
+</html>

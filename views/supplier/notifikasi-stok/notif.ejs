@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Menipis</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/notif.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav_header">
+        <div class="nav_logo">
+            <a href="/">
+            <img src="/images/logo.png" alt="logo" />
+            </a>
+            <span class="judul">VendorVault </span>
+            <div class="separator"></div>
+            <a href="/supplier/low-stock">
+                <% if (notification === "not available") { %>
+                    <i class='bx bx-bell'></i>
+                <% } %>
+                <% if (notification === "available") { %>
+                    <i class='bx bxs-bell-ring bx-tada' ></i>
+                <% } %>
+            </a>
+            <div class="dash"><a href="/supplier/dashboard">Dashboard</a></div>
+            <div class="List"><a href="/supplier/product">List Barang</a></div>
+        </div>
+        </div>
+        <ul class="nav_links">
+        <li>Supplier</li>
+        <li><a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="card">
+
+        <div class="card-body card-color">
+            <h5 class="card-title">List Stok Menipis</h5>
+            <div class="hr-horizontal"></div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Jumlah Stok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% for( let i = 0; i < product.length; i++ ) { %>
+                        <tr>
+                            <td><%= product[i].product_id %></td>
+                            <td><%= product[i].product_name %></td>
+                            <td><%= product[i].product_stock %></td>
+                        </tr>
+                    <% } %>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

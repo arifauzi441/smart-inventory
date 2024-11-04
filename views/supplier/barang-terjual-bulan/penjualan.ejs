@@ -14,21 +14,27 @@
 
     <nav>
         <div class="nav_header">
-            <div class="nav_logo">
-                <a href="#">
-                    <img src="/images/logo.png" alt="logo" />
-                </a>
-                <span class="judul">VendorVault</span>
-                <div class="separator"></div>
-                <div class="notif"><a href="#"><i class='bx bx-bell'></i></a></div>
-                <!-- <i class='bx bxs-bell-ring bx-tada' ></i> ri ini untuk tampilan kalo ada notif stok menipis -->
-                <div class="dash"><a href="#">Dashboard</a></div>
-                <div class="List"><a href="#">List Barang</a></div>
-            </div>
+        <div class="nav_logo">
+            <a href="/">
+            <img src="/images/logo.png" alt="logo" />
+            </a>
+            <span class="judul">VendorVault </span>
+            <div class="separator"></div>
+            <div class="notif"><a href="/supplier/low-stock">
+                <% if (notification === "not available") { %>
+                    <i class='bx bx-bell'></i>
+                <% } %>
+                <% if (notification === "available") { %>
+                    <i class='bx bxs-bell-ring bx-tada' ></i>
+                <% } %>
+            </a></div>
+            <div class="dash"><a href="/supplier/dashboard">Dashboard</a></div>
+            <div class="List"><a href="/supplier/product">List Barang</a></div>
+        </div>
         </div>
         <ul class="nav_links">
-            <li>Supplier</li>
-            <li><a href=""><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        <li>Supplier</li>
+        <li><a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
         </ul>
     </nav>
     
