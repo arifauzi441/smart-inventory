@@ -120,6 +120,9 @@ nav {
 
 
 /* FORM INPUT STOK */
+.color{
+    color: red;
+}
 .f-stok {
     position: relative;
     display: flex;

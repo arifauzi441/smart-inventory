@@ -57,7 +57,7 @@ class Model_Product{
 
     static getProductByStock(){
         return new Promise((resolve, reject) => {
-            db.query(`select * from product where product_stock < 20`, (err, rows) => {
+            db.query(`select * from product where product_stock <= product_minimum_stock`, (err, rows) => {
                 if(err) return reject(err)
                 resolve(rows)
             })

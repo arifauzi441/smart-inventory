@@ -86,10 +86,10 @@
 
                     <% for( let i = 0; i < product.length; i++ ) { %>
                         <tr>
-                            <td><%= product[i].product_id %></td>
-                            <td><%= product[i].product_name %></td>
-                            <td><%= product[i].product_price %></td>
-                            <td><%= product[i].product_stock %></td>
+                            <td <%= product[i].product_stock <= product[i].product_minimum_stock ? `class=color` : `` %>><%= product[i].product_id %></td>
+                            <td <%= product[i].product_stock <= product[i].product_minimum_stock ? `class=color` : `` %>><%= product[i].product_name %></td>
+                            <td <%= product[i].product_stock <= product[i].product_minimum_stock ? `class=color` : `` %>><%= product[i].product_price %></td>
+                            <td <%= product[i].product_stock <= product[i].product_minimum_stock ? `class=color` : `` %>><%= product[i].product_stock %></td>
                             <td><a href="/supplier/edit-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-edit'></i></a>
                                 <a href="/supplier/delete-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-trash'></i></a>
                                 <a id="<%= product[i].product_id %>" class="edit plus-icon"><i class='bx bx-plus-circle'></i></a>

@@ -40,9 +40,9 @@ router.get(`/input-product`, async(req, res) => {
 })
 
 router.post(`/save-product`, async(req, res) => {
-    let {product_name, product_price, product_stock} = req.body
+    let {product_name, product_price, product_stock, product_minimum_stock} = req.body
     try {
-        let data = {product_name, product_price, product_stock}
+        let data = {product_name, product_price, product_stock, product_minimum_stock}
         await Model_Product.storeProduct(data)
 
         res.redirect(`/supplier/product`)
