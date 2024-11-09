@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Akun</title>
+    <title>Graph</title>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/stylesheets/form-akun.css">
+    <link rel="stylesheet" href="/stylesheets/grafik.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-
-    <!-- SIDEBAR -->
+    
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -31,7 +29,6 @@
 
         <div class="menu-bar">
             <div class="menu">
-
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
@@ -49,7 +46,7 @@
                         </a>
                     </li>
                 </ul>
-
+                
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
@@ -93,35 +90,40 @@
         </div>
     </nav>
     
-    
-<!-- BAGIAN isi -->
-    <div class="card">
+    <section class="card">
 
-        <div class="cont-stok">
-            <form class="f-stok">
+        <div class="container-card">
+            <div class="chart-card">
                 <div class="jdl">
-                    <span>Tambah Akun</span>
+                    <span>Analisis Penjualan Berdasarkan Bulan</span>
+                    <div class="hr-horizontals"></div>
                 </div>
-                <div class="hr-horizontal"></div>
-
-                <div class="nama">
-                    <input placeholder="Username"></input>
+                <canvas id="barchart" width="700" height="500"></canvas>
+            </div>
+    
+            <div class="chart-card">
+                <div class="jdl">
+                    <span>Analisis Penjualan Berdasarkan Event</span>
+                    <div class="hr-horizontals"></div>
                 </div>
-                <div class="harga">
-                    <input placeholder="Email"></input>
+                <canvas id="doughnut" width="700" height="500"></canvas>
+            </div>
+    
+            <div class="chart-card">
+                <div class="jdl">
+                    <span>Analisis Penjualan Berdasarkan Hari</span>
+                    <div class="hr-horizontals"></div>
                 </div>
-                <div class="Jumlah">
-                    <input placeholder="Password"></input>
-                </div>
-                <div class="kirim">
-                    <button href="">Tambah</button>
-                </div>
-            </form>
+                <canvas id="myChart" width="700" height="500"></canvas>
+            </div>
         </div>
+        
+    </section>
 
-    </div>
+    <script src="/javascripts/chart1.js" defer></script>
+    <script src="/javascripts/chart2.js" defer></script>
+    <script src="/javascripts/chart3.js" defer></script>
 
-    <script src="/javascripts/script.js"></script>
-
+    <script src="/javascripts/script.js" defer></script>
 </body>
 </html>

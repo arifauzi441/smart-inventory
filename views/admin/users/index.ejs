@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Users</title>
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/stylesheets/stok.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav_header">
+        <div class="nav_logo">
+          <a href="/">
+            <img src="/images/logo.png" alt="logo" />
+          </a>
+          <span class="judul">VendorVault </span>
+          <div class="separator"></div>
+          <div class="notif"><a href="/supplier/low-stock"> </a></div>
+
+          <div class="List"><a href="/admin">List users</a></div>
+        </div>
+      </div>
+      <ul class="nav_links">
+        <li>Admin</li>
+        <li>
+          <a href="/logout"
+            ><i class="bx bx-log-out-circle bx-flip-horizontal"></i
+          ></a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="card">
+      <div class="card-body card-color">
+        <h5 class="card-title">List Users</h5>
+        <div class="hr-horizontal"></div>
+        <div class="search-container">
+          <div class="search-box">
+            <i class="bx bx-search icon"></i>
+            <input type="text" id="searchInput" placeholder="Search.." />
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Username</th>
+              <!-- <th scope="col">Pasword</th> -->
+
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for( var i = 0; i < data.length; i++ ) { %>
+            <tr>
+              <td><%= data[i].id_user %></td>
+              <td><%= data[i].username %></td>
+
+              <td><%= data[i].level_user %></td>
+
+              <td>
+                <a href="/admin/edit-users/<%= data[i].id_user%>" class="edit"
+                  ><i class="bx bx-edit"></i
+                ></a>
+                <a href="/admin/delete-users/<%= data[i].id_user%>" class="edit"
+                  ><i class="bx bx-trash"></i
+                ></a>
+                <div class="List"><a href="/admin/create-users">Tambah</a></div>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="/javascripts/stok.js"></script>
+  </body>
+</html>
