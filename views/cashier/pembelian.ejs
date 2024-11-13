@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier - Input</title>
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/pembelian.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+</head>
+<body>
+    
+    <nav>
+        <div class="nav_header">
+        <div class="nav_logo">
+            <a href="#">
+            <img src="/images/logo.png" alt="logo" />
+            </a>
+            <span class="judul">VendorVault </span>
+            <div class="separator"></div>
+            <div class="dash"><a href="#">Dashboard</a></div>
+            <div class="List"><a href="#">Pembelian</a></div>
+        </div>
+        </div>
+        <ul class="nav_links">
+        <li>Kasir</li>
+        <li><a href=""><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        </ul>
+    </nav>
+    
+    <section class="card">
+
+        <div class="card-out">
+
+            <div class="card-body">
+
+                <div class="navi-isi">
+                    <span class="cas-jdl">Cashier</span>
+                    
+                    <div class="pp">
+                        <span class="nm-cas">Danang</span>
+                        <a class="pp-cas"><i class='bx bxs-user-circle'></i></a>
+                    </div>
+                </div>
+
+                <div class="isi-beli">
+
+                    <div class="bgn-kiri">
+                        <div class="bckg-kiri">
+
+                            <form action="">
+
+                                <div class="form-atas">
+
+                                    <div id="bgn-input" class="bgn-input" style="display: none;">
+                                        <div class="isi-input-atas">
+                                            <span class="jdl">Indomie</span>
+                                            <span class="jdl-jml">Jumlah :</span>
+                                        </div>
+
+                                        <div class="isi-input-bawah">
+                                            <span class="hrg">Rp 10000</span>
+                                            <input class="inp-jml" type="number" placeholder="Input Jumlah">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-bawah">
+                                    <div class="bgn-bayar">
+                                        <div class="isi-total-atas">
+                                            <div class="total-isi">
+                                                <span class="jdl-ttl">Total :</span>
+                                                <span class="hrg-total">Rp 0</span>
+                                            </div>
+                                            
+                                            <span class="jdl-bayar">Bayar :</span>
+                                        </div>
+
+                                        <div class="isi-total-bawah">
+                                            <div class="total-jmlh">
+                                                <span class="jdl-jmlh">Jumlah Barang :</span>
+                                                <span class="jmlh-brg">0</span>
+                                            </div>
+                                            
+                                            <input class="inp-byr" type="number" placeholder="Bayar">
+                                        </div>
+                                    </div>
+
+                                    <div class="bgn-tombol">
+                                        <button>Payment <i class='bx bx-chevron-right' ></i></button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class="rekemendasi">
+                            <span class="judul-rekom">Rekomendasi Produk</span>
+
+                            <ul>
+                                <li>Shampo</li>
+                                <li>Sabun</li>
+                                <li>Odol</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                    <div class="bgn-kanan">
+
+                        <div class="search-container">
+                            <div class="search-box">
+                                <i class='bx bx-search icon'></i>
+                                <input type="text" id="searchInput" placeholder="Search.." />
+                            </div>
+                        </div>
+
+                        <div class="cont-brg">
+
+                            <div class="kotak">
+                                <div class="cont-gmbr">
+                                    <img src="/images/indomie.png" alt="gambar-produk">
+                                </div>
+
+                                <div class="keterangan">
+                                    <span class="ket-jdl">Indomie</span>
+                                    <span class="ket-hrg">Rp 12,000</span>
+                                </div>
+                            </div>
+
+                            <div class="kotak">
+                                <div class="cont-gmbr">
+                                    <img src="/images/shampo.png" alt="gambar-produk">
+                                </div>
+
+                                <div class="keterangan">
+                                    <span class="ket-jdl">Shampo</span>
+                                    <span class="ket-hrg">Rp 13,000</span>
+                                </div>
+                            </div>
+
+                            <div class="kotak">
+                                <div class="cont-gmbr">
+                                    <img src="/images/sabun.png" alt="gambar-produk">
+                                </div>
+
+                                <div class="keterangan">
+                                    <span class="ket-jdl">Sabun</span>
+                                    <span class="ket-hrg">Rp 11,000</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+        </div>
+        </div>
+
+
+        
+    </section>
+
+    <script src="/javascripts/pembelian.js"></script>
+</body>
+</html>
