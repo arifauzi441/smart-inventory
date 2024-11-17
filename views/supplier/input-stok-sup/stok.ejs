@@ -87,18 +87,33 @@
                 <tbody>
 
                     <% for( let i = 0; i < product.length; i++ ) { %>
-                        <tr>
-                            <td><%= product[i].product_id %></td>
-                            <td class="gmbr"><img src="/images/produk-images/indomie.png" alt="gambar"></td>
-                            <td><%= product[i].product_name %></td>
-                            <td><%= product[i].product_price %></td>
-                            <td><%= product[i].product_stock %></td>
-                            <td>20</td> 
-                            <td><a href="/supplier/edit-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-edit'></i></a>
-                                <a href="/supplier/delete-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-trash'></i></a>
-                                <a id="<%= product[i].product_id %>" class="edit plus-icon"><i class='bx bx-plus-circle'></i></a>
-                            </td>
-                        </tr>
+                        <% if (product[i].product_minimum_stock >= product[i].product_stock) { %>
+                            <tr>
+                                <td style="color:red;"><%= product[i].product_id %></td>
+                                <td class="gmbr"><img src="<%= product[i].product_image %>" alt="gambar"></td>
+                                <td style="color:red;"><%= product[i].product_name %></td>
+                                <td style="color:red;"><%= product[i].product_price %></td>
+                                <td style="color:red;"><%= product[i].product_stock %></td>
+                                <td style="color:red;"><%= product[i].product_minimum_stock %></td> 
+                                <td><a href="/supplier/edit-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-edit'></i></a>
+                                    <a href="/supplier/delete-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-trash'></i></a>
+                                    <a id="<%= product[i].product_id %>" class="edit plus-icon"><i class='bx bx-plus-circle'></i></a>
+                                </td>
+                            </tr>
+                        <% }else { %>
+                            <tr>
+                                <td><%= product[i].product_id %></td>
+                                <td class="gmbr"><img src="<%= product[i].product_image %>" alt="gambar"></td>
+                                <td><%= product[i].product_name %></td>
+                                <td><%= product[i].product_price %></td>
+                                <td><%= product[i].product_stock %></td>
+                                <td><%= product[i].product_minimum_stock %></td> 
+                                <td><a href="/supplier/edit-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-edit'></i></a>
+                                    <a href="/supplier/delete-product/<%= product[i].product_id %>" class="edit"><i class='bx bx-trash'></i></a>
+                                    <a id="<%= product[i].product_id %>" class="edit plus-icon"><i class='bx bx-plus-circle'></i></a>
+                                </td>
+                            </tr>
+                        <% } %>        
                     <% } %>
                     
                 </tbody>

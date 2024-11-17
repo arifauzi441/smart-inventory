@@ -31,10 +31,9 @@
 
         <div class="menu-bar">
             <div class="menu">
-
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/dashboard">
                             <i class='bx bx-home icon' ></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -43,9 +42,9 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/users">
                             <i class='bx bxs-user-account icon' ></i>
-                            <span class="text nav-text">Account</span>
+                            <span class="text nav-text">Users</span>
                         </a>
                     </li>
                 </ul>
@@ -61,7 +60,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/transaction-history">
                             <i class='bx bx-detail icon' ></i>
                             <span class="text nav-text">Order Record</span>
                         </a>
@@ -71,7 +70,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/graph">
                             <i class='bx bxs-doughnut-chart icon'></i>
                             <span class="text nav-text">Graph</span>
                         </a>
@@ -83,7 +82,7 @@
             <div class="bottom-content">
                 <div class="hr-horizontal"></div>
                 <li class="">
-                    <a href="#">
+                    <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -98,23 +97,23 @@
     <div class="card">
 
         <div class="cont-stok">
-            <form class="f-stok">
+            <form class="f-stok" action="/admin/update-users/<%= users.id_user %>" method="post">
                 <div class="jdl">
-                    <span>Tambah Akun</span>
+                    <span>Edit Akun</span>
                 </div>
                 <div class="hr-horizontal"></div>
 
                 <div class="nama">
-                    <input placeholder="Username"></input>
-                </div>
-                <div class="harga">
-                    <input placeholder="Email"></input>
+                    <input placeholder="Username" name="username" value="<%= users.username %>"></input>
                 </div>
                 <div class="Jumlah">
-                    <input placeholder="Password"></input>
+                    <input placeholder="Password" name="password" value="<%= users.password %>"></input>
+                </div>
+                <div class="Role">
+                    <input placeholder="Role" name="level_user" value="<%= users.level_user %>"></input>
                 </div>
                 <div class="kirim">
-                    <button href="">Tambah</button>
+                    <button type="submit">Submit</button>
                 </div>
             </form>
         </div>

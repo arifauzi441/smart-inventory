@@ -33,7 +33,7 @@
             <div class="menu">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/dashboard">
                             <i class='bx bx-home icon' ></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -42,9 +42,9 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/users">
                             <i class='bx bxs-user-account icon' ></i>
-                            <span class="text nav-text">Account</span>
+                            <span class="text nav-text">Users</span>
                         </a>
                     </li>
                 </ul>
@@ -60,7 +60,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/transaction-history">
                             <i class='bx bx-detail icon' ></i>
                             <span class="text nav-text">Order Record</span>
                         </a>
@@ -70,7 +70,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/graph">
                             <i class='bx bxs-doughnut-chart icon'></i>
                             <span class="text nav-text">Graph</span>
                         </a>
@@ -82,7 +82,7 @@
             <div class="bottom-content">
                 <div class="hr-horizontal"></div>
                 <li class="">
-                    <a href="#">
+                    <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -106,7 +106,7 @@
                 </div>
                 
                 <div class="info-barang">
-                    <button><i class='bx bx-plus'></i>Tambah Akun</button>
+                    <button><i class='bx bx-plus'></i><a style="color: black; text-decoration: none;" href="/admin/create-users">Tambah Akun</a></button>
                 </div>
             </div>
             <table class="table">
@@ -114,82 +114,21 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Opsi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Ari</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="color">2</td>
-                        <td>Danang</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Ifzal</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>4</td>
-                        <td>Mawla</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>5</td>
-                        <td>Dafa</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>6</td>
-                        <td>Lexy</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7</td>
-                        <td>Haidar</td>
-                        <td>email@gemil.com</td>
-                        <td>*******</td>
-                        <td><a class="edit"><i class='bx bx-edit'></i></a>
-                            <a class="edit"><i class='bx bx-trash'></i></a>
-                        </td>
-                    </tr>
-                    
+                    <% for( let i = 0; i < data.length; i++ ) { %>
+                        <tr>
+                            <td><%= data[i].id_user %></td>
+                            <td><%= data[i].username %></td>
+                            <td><%= data[i].level_user %></td>
+                            <td><a href="/admin/edit-users/<%= data[i].id_user %>" class="edit"><i class='bx bx-edit'></i></a>
+                                <a href="/admin/delete-users/<%= data[i].id_user %>" class="edit"><i class='bx bx-trash'></i></a>
+                            </td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
         </div>

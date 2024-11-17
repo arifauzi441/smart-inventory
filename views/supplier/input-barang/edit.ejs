@@ -39,7 +39,7 @@
     <div class="card">
 
         <section class="cont-stok">
-            <form class="f-stok" method="post" action="/supplier/update-product/<%= product.product_id %>">
+            <form class="f-stok" method="post" action="/supplier/update-product/<%= product.product_id %>" enctype="multipart/form-data">
                 <div class="jdl">
                     <span>Input Barang</span>
                 </div>
@@ -53,6 +53,9 @@
                 </div>
                 <div class="Jumlah">
                     <input type="number" placeholder="Jumlah Stok" name="product_stock" value="<%= product.product_stock %>">
+                </div>
+                <div class="Min">
+                    <input type="number" placeholder="Min Stok" name="product_minimum_stock" value="<%= product.product_minimum_stock %>">
                 </div>
                 <div class="gambr">
                     <input type="file" placeholder="Input Gambar" name="product_image">

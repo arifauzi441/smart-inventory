@@ -33,7 +33,7 @@
             <div class="menu">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/dashboard">
                             <i class='bx bx-home icon' ></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
@@ -42,9 +42,9 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/users">
                             <i class='bx bxs-user-account icon' ></i>
-                            <span class="text nav-text">Account</span>
+                            <span class="text nav-text">Users</span>
                         </a>
                     </li>
                 </ul>
@@ -60,7 +60,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/transaction-history">
                             <i class='bx bx-detail icon' ></i>
                             <span class="text nav-text">Order Record</span>
                         </a>
@@ -70,7 +70,7 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="/admin/graph">
                             <i class='bx bxs-doughnut-chart icon'></i>
                             <span class="text nav-text">Graph</span>
                         </a>
@@ -82,7 +82,7 @@
             <div class="bottom-content">
                 <div class="hr-horizontal"></div>
                 <li class="">
-                    <a href="#">
+                    <a href="/logout">
                         <i class='bx bx-log-out icon' ></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -120,79 +120,28 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td rowspan="3">3123522001</td>
-                        <td rowspan="3">Danang</td>
-                        <td rowspan="3">2024-05-12</td>
-                        <td class="bordered-cell" rowspan="3">12:04:23</td>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-
-                    <tr>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-
-                    <tr>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-
-                    <tr>
-                        <td>3123522003</td>
-                        <td>Danang</td>
-                        <td>2024-05-12</td>
-                        <td>12:04:23</td>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-        
-                    <tr>
-                        <td rowspan="2">3123522002</td>
-                        <td rowspan="2">Danang</td>
-                        <td rowspan="2">2024-05-12</td>
-                        <td class="bordered-cell" rowspan="2">12:04:23</td>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-
-                    <tr>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-        
-                    <tr>
-                        <td>3123522003</td>
-                        <td>Danang</td>
-                        <td>2024-05-12</td>
-                        <td>12:04:23</td>
-                        <td>Indomie</td>
-                        <td>30</td>
-                        <td>Rp 30000</td>
-                        <td>Rp 50000</td>
-                        <td>Rp 20000</td>
-                    </tr>
-                    
+                    <% for( let i = 0; i < salesData.length; i++ ) { %>
+                        <tr>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_id %></td>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].username %></td>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_date %></td>
+                            <td class="bordered-cell" rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_time %></td>
+                            <td><%= salesData[i].detail[0].product_name %></td>
+                            <td><%= salesData[i].detail[0].amount_product %></td>
+                            <td><%= salesData[i].detail[0].total_price %></td>
+                            <td><%= salesData[i].detail[0].payment %></td>
+                            <td><%= salesData[i].detail[0].return_payment %></td>
+                        </tr>
+                        <% for( let j = 1; j < salesData[i].detail.length; j++ ) { %>
+                            <tr>
+                                <td><%= salesData[i].detail[j].product_name %></td>
+                                <td><%= salesData[i].detail[j].amount_product %></td>
+                                <td><%= salesData[i].detail[j].total_price %></td>
+                                <td><%= salesData[i].detail[j].payment %></td>
+                                <td><%= salesData[i].detail[j].return_payment %></td>
+                            </tr>
+                        <% } %>
+                    <% } %>
                 </tbody>
             </table>
         </div>

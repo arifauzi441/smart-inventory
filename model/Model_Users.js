@@ -3,7 +3,7 @@ let db = require(`../db/config`);
 class Model_Users {
   static getAll() {
     return new Promise((resolve, reject) => {
-      db.query(`select * from users order by id_user desc`, (err, rows) => {
+      db.query(`select * from users`, (err, rows) => {
         if (err) return reject(err);
         resolve(rows);
       });
