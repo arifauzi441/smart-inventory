@@ -15,9 +15,10 @@ produkKotak.forEach(kotak => {
         // Ambil informasi produk dari kotak yang diklik
         const judulProduk = kotak.querySelector('.ket-jdl').textContent;
         const hargaProduk = parseInt(kotak.querySelector('.ket-hrg').textContent.replace('Rp ', '').replace(',', ''));
-        
+
         // Format HTML untuk menampilkan produk baru
         bgnInput.innerHTML = `
+            <button class="hapus-btn">X</button>
             <div class="isi-input-atas">
                 <span class="jdl">${judulProduk}</span>
                 <span class="jdl-jml">Jumlah :</span>
@@ -27,20 +28,19 @@ produkKotak.forEach(kotak => {
                 <input class="inp-jml" type="number" placeholder="Input Jumlah">
             </div>
         `;
-        
+
         formAtas.appendChild(bgnInput);
-        
         formBawah.classList.add('aktif');
         rekomendasi.classList.add('aktif');
 
         // Ambil elemen input jumlah dan harga
         const inpJml = bgnInput.querySelector('.inp-jml');
         const hrgElement = bgnInput.querySelector('.hrg');
-        
+
         // Ambil elemen .hrg-total dan .jmlh-brg untuk menampilkan total harga dan jumlah barang
         const hrgTotal = formBawah.querySelector('.hrg-total');
         const jmlhBrg = formBawah.querySelector('.jmlh-brg');
-        
+
         // Variabel untuk menyimpan harga total produk sebelumnya
         let previousTotal = 0;
         let previousJumlah = 0;
@@ -68,9 +68,41 @@ produkKotak.forEach(kotak => {
 
             // Update jumlah barang di .jmlh-brg
             jmlhBrg.textContent = totalJumlahBarang;
-            
+
             // Simpan jumlah yang dimasukkan untuk produk ini
             previousJumlah = jumlah;
+        });
+
+        // Ambil tombol X
+        const hapusBtn = bgnInput.querySelector('.hapus-btn');
+
+        // Tambahkan event listener untuk tombol X
+        hapusBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); // Menghindari klik yang tidak diinginkan
+
+            // Ambil elemen input yang ingin dihapus
+            const inputElement = bgnInput.querySelector('.inp-jml');
+
+            if (inputElement) {
+                // Ambil nilai jumlah input sebelum dihapus
+                const jumlahInput = parseInt(inputElement.value) || 0;
+
+                // Kurangi total harga dan jumlah barang berdasarkan input yang dihapus
+                totalHarga -= jumlahInput * hargaProduk;
+                hrgTotal.textContent = `Rp ${totalHarga.toLocaleString()}`;
+
+                totalJumlahBarang -= jumlahInput;
+                jmlhBrg.textContent = totalJumlahBarang;
+
+                // Hapus elemen input (input yang terkait)
+                bgnInput.remove();
+
+                // Periksa jika tidak ada input lagi di form-atas
+                if (formAtas.querySelectorAll('.bgn-input').length === 0) {
+                    formAtas.classList.remove('aktif'); // Sembunyikan form atas
+                    rekomendasi.classList.remove('aktif'); // Sembunyikan rekomendasi
+                }
+            }
         });
     });
 });
