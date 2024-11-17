@@ -207,6 +207,33 @@ nav {
     background-color: #404A50;
 }
 
+.hapus-btn {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background-color: #404A50; /* Warna merah */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.hapus-btn:hover {
+    background-color: #16222A;
+}
+
+.hapus-btn:active {
+    transform: scale(0.9); 
+}
+
 .bgn-input {
     display: flex;
     flex-direction: column;
