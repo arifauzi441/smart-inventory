@@ -331,7 +331,7 @@ h6 {
   .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: var(--nav-hover-color);
+    color: #7AA1B3;
   }
 
   .navmenu .dropdown ul {
