@@ -51,15 +51,6 @@
 
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-collection icon' ></i>
-                            <span class="text nav-text">Item Data</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="menu-links">
-                    <li class="nav-link">
                         <a href="/admin/transaction-history">
                             <i class='bx bx-detail icon' ></i>
                             <span class="text nav-text">Order Record</span>
@@ -112,11 +103,12 @@
                         <th scope="col">Nama Kasir</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Waktu</th>
-                        <th scope="col">Nama Barang</th>
-                        <th scope="col">Jumlah</th>
                         <th scope="col">Total Harga</th>
                         <th scope="col">Bayar</th>
                         <th scope="col">Kembali</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Jumlah</th>
+                        <th scope="col">Harga</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,20 +117,19 @@
                             <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_id %></td>
                             <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].username %></td>
                             <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_date %></td>
-                            <td class="bordered-cell" rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_time %></td>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_time %></td>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].total_price %></td>
+                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].payment %></td>
+                            <td class="bordered-cell" rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].return_payment %></td>
                             <td><%= salesData[i].detail[0].product_name %></td>
                             <td><%= salesData[i].detail[0].amount_product %></td>
-                            <td><%= salesData[i].detail[0].total_price %></td>
-                            <td><%= salesData[i].detail[0].payment %></td>
-                            <td><%= salesData[i].detail[0].return_payment %></td>
+                            <td><%= salesData[i].detail[0].price %></td>
                         </tr>
                         <% for( let j = 1; j < salesData[i].detail.length; j++ ) { %>
                             <tr>
                                 <td><%= salesData[i].detail[j].product_name %></td>
                                 <td><%= salesData[i].detail[j].amount_product %></td>
-                                <td><%= salesData[i].detail[j].total_price %></td>
-                                <td><%= salesData[i].detail[j].payment %></td>
-                                <td><%= salesData[i].detail[j].return_payment %></td>
+                                <td><%= salesData[i].detail[j].price %></td>
                             </tr>
                         <% } %>
                     <% } %>

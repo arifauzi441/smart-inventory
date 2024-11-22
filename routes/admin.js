@@ -86,15 +86,17 @@ router.get(`/transaction-history`, async(req, res) => {
 
   for (let i = 0; i < salesData.length; i++) {
     salesData[i].detail = await Model_Transaction_Detail.getByTransId(salesData[i].transaction_id)
+    
     salesData[i].transaction_date = salesData[i].transaction_date.toLocaleDateString(`en-CA`)
+    salesData[i].total_price = changeToRupiah(salesData[i].total_price)
+    salesData[i].payment = changeToRupiah(salesData[i].payment)
+    salesData[i].return_payment = changeToRupiah(salesData[i].return_payment)
 
     for (let j = 0; j < salesData[i].detail.length; j++) {
-      salesData[i].detail[j].total_price = changeToRupiah(salesData[i].detail[j].total_price)
-      salesData[i].detail[j].payment = changeToRupiah(salesData[i].detail[j].payment)
-      salesData[i].detail[j].return_payment = changeToRupiah(salesData[i].detail[j].return_payment)
+      salesData[i].detail[j].price = changeToRupiah(salesData[i].detail[j].price)
     }
   }
-
+  console.log(salesData)
   res.render(`admin/riwayat`, { salesData })
 })
 

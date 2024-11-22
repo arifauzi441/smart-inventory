@@ -1,6 +1,16 @@
 const db = require(`../db/config`)
 
 class Model_Transaction_Detail{
+    static insertDetail(data){
+        return new Promise((resolve, reject) => {
+            db.query(`insert into transaction_detail (amount_product, price, product_id, transaction_id) 
+                values ?`, [data], (err, rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
     static getByTransId(id){
         return new Promise((resolve, reject) => {
             db.query(`select d.*, p.* from transaction_detail d
