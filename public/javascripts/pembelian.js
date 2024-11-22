@@ -14,31 +14,42 @@ produkKotak.forEach(kotak => {
 
         // Ambil informasi produk dari kotak yang diklik
         const judulProduk = kotak.querySelector('.ket-jdl').textContent;
-        const hargaProduk = parseInt(kotak.querySelector('.ket-hrg').textContent.replace('Rp ', '').replace(',', ''));
-
+        const hargaProduk = parseInt(
+            kotak.querySelector('.ket-hrg').textContent
+                .replace(/[^\d,]/g, '') // Hapus semua kecuali angka dan koma
+                .split(',')[0] // Ambil bagian sebelum koma
+                .replace(/\./g, '') // Hapus separator ribuan
+        );
+        const product_id = kotak.querySelector('.ket-id').value
+        const product_stock = kotak.querySelector(`.stock`).value
         // Format HTML untuk menampilkan produk baru
         bgnInput.innerHTML = `
             <button class="hapus-btn">X</button>
             <div class="isi-input-atas">
                 <span class="jdl">${judulProduk}</span>
                 <span class="jdl-jml">Jumlah :</span>
+                <input type="hidden" name="product_id" value="${product_id}">
             </div>
             <div class="isi-input-bawah">
                 <span class="hrg">Rp ${hargaProduk}</span>
-                <input class="inp-jml" type="number" placeholder="Input Jumlah">
+                <input class="price" type="hidden" name="price" value="${hargaProduk}">
+                <input class="inp-jml" type="number" min="0" max="${product_stock}" name="amount_product" placeholder="Input Jumlah">
             </div>
         `;
 
         formAtas.appendChild(bgnInput);
         formBawah.classList.add('aktif');
         rekomendasi.classList.add('aktif');
+        rekomendasi.querySelector(`ul li`).innerHTML = kotak.querySelector(`.rekom-name`).value
 
         // Ambil elemen input jumlah dan harga
         const inpJml = bgnInput.querySelector('.inp-jml');
         const hrgElement = bgnInput.querySelector('.hrg');
+        const priceElement = bgnInput.querySelector('.price');
 
         // Ambil elemen .hrg-total dan .jmlh-brg untuk menampilkan total harga dan jumlah barang
         const hrgTotal = formBawah.querySelector('.hrg-total');
+        const hrgTotalPrice = formBawah.querySelector('.hrg-total-price');
         const jmlhBrg = formBawah.querySelector('.jmlh-brg');
 
         // Variabel untuk menyimpan harga total produk sebelumnya
@@ -49,6 +60,8 @@ produkKotak.forEach(kotak => {
         inpJml.addEventListener('input', () => {
             const jumlah = parseInt(inpJml.value) || 0;
             const harga = hargaProduk;
+            hrgElement.innerHTML = harga * jumlah
+            priceElement.value = hrgElement.innerHTML
 
             // Kurangi harga total produk sebelumnya dari totalHarga
             totalHarga -= previousTotal;
@@ -62,6 +75,7 @@ produkKotak.forEach(kotak => {
 
             // Update total harga di .hrg-total
             hrgTotal.textContent = `Rp ${totalHarga.toLocaleString()}`;
+            hrgTotalPrice.value = totalHarga
 
             // Update jumlah barang yang dibeli
             totalJumlahBarang = totalJumlahBarang - previousJumlah + jumlah;

@@ -10,8 +10,8 @@ var flash = require(`express-flash`)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var supplierRouter = require(`./routes/supplier`)
-var datausers = require('./routes/admin');
-
+var adminRouter = require('./routes/admin');
+var cashierRouter = require(`./routes/cashier`)
 
 var app = express();
 
@@ -41,7 +41,8 @@ app.use(flash())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/supplier', supplierRouter);
-app.use('/admin', datausers);
+app.use('/admin', adminRouter);
+app.use('/cashier', cashierRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

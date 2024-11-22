@@ -5,9 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nota Pembelian</title>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/nota.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-
+    <style>
+        @media print {
+          body {
+            margin: 0; /* Hilangkan margin default */
+            padding: 0; /* Hilangkan padding default */
+          }
+          .nota {
+            width: 80mm; /* Sesuaikan lebar nota dengan ukuran kertas */
+            margin: auto; /* Pusatkan elemen */
+            padding: 10px; /* Tambahkan sedikit padding */
+            border: 1px solid #000; /* Opsional: Tambahkan border */
+            font-size: 12px; /* Sesuaikan ukuran font */
+          }
+      
+          /* Atur margin untuk halaman cetak */
+          @page {
+            size: 115mm auto; /* Lebar 80mm, panjang otomatis sesuai konten */
+            margin: 0; /* Hilangkan margin default */
+          }
+        }
+      </style>      
 </head>
 
 <body>
@@ -33,13 +53,13 @@
 
                 <div class="kedua">
                     <div class="tanggal-kasir">
-                        <span class="tgl">2024-08-02</span>
+                        <span class="tgl"><%= transaction.transaction_date %></span>
                         <span>Kasir</span>
                     </div>
 
                     <div class="waktu-kasir">
-                        <span class="wkt">08:45:36</span>
-                        <span>Danang</span>
+                        <span class="wkt"><%= transaction.transaction_time %></span>
+                        <span><%= transaction.username %></span>
                     </div>
 
                     <div class="jarak"></div>
@@ -50,52 +70,41 @@
                 <div class="hr-dash"></div>
 
                 <div class="ketiga">
-                    <span class="nmb">1. Indomie</span>
-                    <div class="barang">
-                        <span class="jml">2 x 3,000</span>
-                        <span class="hrg">Rp 6.000</span>
-                    </div>
-
-                    <span class="nmb">2. Sabu-sabu</span>
-                    <div class="barang">
-                        <span class="jml">1 x 20,000</span>
-                        <span class="hrg">Rp 20.000</span>
-                    </div>
-
-                    <span class="nmb">3. Miras</span>
-                    <div class="barang">
-                        <span class="jml">5 x 2,000</span>
-                        <span class="hrg">Rp 10.000</span>
-                    </div>
-                </div>
+                    <% for( let i = 0; i < transaction.detail.length; i++ ) { %>
+                        <span class="nmb"><%= i+1 %>. <%= transaction.detail[i].product_name %></span>
+                        <div class="barang">
+                            <span class="jml"><%= transaction.detail[i].amount_product %> x <%= transaction.detail[i].product_price %></span>
+                            <span class="hrg"><%= transaction.detail[i].price %></span>
+                        </div>
+                    <% } %>
 
                 <div class="hr-dash"></div>
 
                 <div class="keempat">
 
                     <div class="total">
-                        <span class="total-barang">Total Barang</span> 
-                        <span class="nomor-total">: 8</span>
+                        <span class="total-barang"></span> 
+                        <span class="nomor-total"></span>
                     </div>
 
                     <div class="subtotal">
                         <span class="subt">Sub Total</span>
-                        <span class="hrgs">Rp 36.000</span>
+                        <span class="hrgs"><%= transaction.total_price %></span>
                     </div>
 
                     <div class="barang">
                         <span class="ttl">Total</span>
-                        <span class="hrgsi">Rp 36.000</span>
+                        <span class="hrgsi"><%= transaction.total_price %></span>
                     </div>
 
                     <div class="barang">
                         <span class="byr">Bayar</span>
-                        <span class="hrgs">Rp 40.000</span>
+                        <span class="hrgs"><%= transaction.payment %></span>
                     </div>
 
                     <div class="barang">
                         <span class="kmbl">Kembali</span>
-                        <span class="hrgs">Rp 4.000</span>
+                        <span class="hrgs"><%= transaction.return_payment %></span>
                     </div>
                 </div>
 
@@ -104,9 +113,11 @@
             </div>
 
         </div>
-
-
     </div>
-
+    <script>
+        window.onload = () => {
+          window.print(); // Otomatis mencetak
+        };
+      </script>
 </body>
 </html>

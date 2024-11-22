@@ -55,11 +55,35 @@ class Model_Product{
         })
     }
 
-    static getProductByStock(){
+    static reduceStock(updates,caseStatement,data){
         return new Promise((resolve, reject) => {
-            db.query(`select * from product where product_stock < 20`, (err, rows) => {
+            db.query(`UPDATE product SET product_stock = CASE
+                    ${caseStatement} END WHERE product_id 
+                    IN (${updates.map(item => '?').join(', ')})`, data, (err, rows) => {
                 if(err) return reject(err)
                 resolve(rows)
+            })
+        })
+    }
+
+    static getProductByStock(){
+        return new Promise((resolve, reject) => {
+            db.query(`select * from product where product_stock <= product_minimum_stock`, (err, rows) => {
+                if(err) return reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
+    static getProductPair(id){
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT t2.product_id AS product_b, p.product_name, COUNT(*) AS frequency 
+                FROM transaction_detail t1 JOIN transaction_detail t2 
+                ON t1.transaction_id = t2.transaction_id AND t1.product_id != t2.product_id 
+                JOIN product p ON t2.product_id = p.product_id WHERE t1.product_id = ? 
+                GROUP BY t1.product_id, t2.product_id ORDER BY frequency DESC`, [id], (err, rows) => {
+                if(err) return reject(err)
+                resolve(rows[0]?.product_name)
             })
         })
     }

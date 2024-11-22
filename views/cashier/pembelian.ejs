@@ -13,18 +13,18 @@
     <nav>
         <div class="nav_header">
         <div class="nav_logo">
-            <a href="#">
+            <a href="/">
             <img src="/images/logo.png" alt="logo" />
             </a>
             <span class="judul">VendorVault </span>
             <div class="separator"></div>
-            <div class="dash"><a href="#">Dashboard</a></div>
-            <div class="List"><a href="#">Pembelian</a></div>
+            <div class="dash"><a href="/cashier/dashboard">Dashboard</a></div>
+            <div class="List"><a href="/cashier/POS">Pembelian</a></div>
         </div>
         </div>
         <ul class="nav_links">
         <li>Kasir</li>
-        <li><a href=""><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
+        <li><a href="/logout"><i class='bx bx-log-out-circle bx-flip-horizontal'></i></a></li>
         </ul>
     </nav>
     
@@ -38,7 +38,7 @@
                     <span class="cas-jdl">Cashier</span>
                     
                     <div class="pp">
-                        <span class="nm-cas">Danang</span>
+                        <span class="nm-cas"><%= user.username %></span>
                         <a class="pp-cas"><i class='bx bxs-user-circle'></i></a>
                     </div>
                 </div>
@@ -48,8 +48,8 @@
                     <div class="bgn-kiri">
                         <div class="bckg-kiri">
 
-                            <form action="">
-
+                            <form action="/cashier/transaction" method="post">
+                                <input type="hidden" value="<%= user.id_user %>" name="id_user">
                                 <div class="form-atas">
 
                                     <div id="bgn-input" class="bgn-input" style="display: none;">
@@ -73,6 +73,7 @@
                                             <div class="total-isi">
                                                 <span class="jdl-ttl">Total :</span>
                                                 <span class="hrg-total">Rp 0</span>
+                                                <input class="hrg-total-price" type="hidden" name="total_price">
                                             </div>
                                             
                                             <span class="jdl-bayar">Bayar :</span>
@@ -84,7 +85,7 @@
                                                 <span class="jmlh-brg">0</span>
                                             </div>
                                             
-                                            <input class="inp-byr" type="number" placeholder="Bayar">
+                                            <input class="inp-byr" type="number" placeholder="Bayar" name="payment">
                                         </div>
                                     </div>
 
@@ -99,11 +100,8 @@
 
                         <div class="rekemendasi">
                             <span class="judul-rekom">Rekomendasi Produk</span>
-
                             <ul>
                                 <li>Shampo</li>
-                                <li>Sabun</li>
-                                <li>Odol</li>
                             </ul>
                         </div>
 
@@ -120,39 +118,21 @@
                         </div>
 
                         <div class="cont-brg">
-
-                            <div class="kotak">
-                                <div class="cont-gmbr">
-                                    <img src="/images/indomie.png" alt="gambar-produk">
+                            <% for( let i = 0; i < product.length; i++ ) { %>
+                                <div class="kotak">
+                                    <div class="cont-gmbr">
+                                        <img src="<%= product[i].product_image %>" alt="gambar-produk">
+                                    </div>
+    
+                                    <div class="keterangan">
+                                        <span class="ket-jdl"><%= product[i].product_name %></span>
+                                        <span class="ket-hrg"><%= product[i].product_price %></span>
+                                        <input type="hidden" class="stock" value="<%= product[i].product_stock %>">
+                                        <input type="hidden" class="rekom-name" value="<%= product[i].pair %>">
+                                        <input type="hidden" class="ket-id" value="<%= product[i].product_id %>">
+                                    </div>
                                 </div>
-
-                                <div class="keterangan">
-                                    <span class="ket-jdl">Indomie</span>
-                                    <span class="ket-hrg">Rp 12,000</span>
-                                </div>
-                            </div>
-
-                            <div class="kotak">
-                                <div class="cont-gmbr">
-                                    <img src="/images/shampo.png" alt="gambar-produk">
-                                </div>
-
-                                <div class="keterangan">
-                                    <span class="ket-jdl">Shampo</span>
-                                    <span class="ket-hrg">Rp 13,000</span>
-                                </div>
-                            </div>
-
-                            <div class="kotak">
-                                <div class="cont-gmbr">
-                                    <img src="/images/sabun.png" alt="gambar-produk">
-                                </div>
-
-                                <div class="keterangan">
-                                    <span class="ket-jdl">Sabun</span>
-                                    <span class="ket-hrg">Rp 11,000</span>
-                                </div>
-                            </div>
+                            <% } %>
 
                         </div>
 

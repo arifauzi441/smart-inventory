@@ -20,8 +20,9 @@ router.post(`/log`, async(req, res) => {
       return res.redirect(`/login`)
     }
     req.session.userId = users.id_user
+    if(users.level_user === `admin`) return res.redirect(`/admin/dashboard`)
     if(users.level_user === `supplier`) return res.redirect(`/supplier/dashboard`)
-    if(users.level_user === `kasir`) return res.redirect(`/kasir/dashboard`)
+    if(users.level_user === `cashier`) return res.redirect(`/cashier/dashboard`)
   } catch (error) {
     console.log(error)
     res.redirect(`/login`)

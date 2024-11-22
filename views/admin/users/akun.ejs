@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat Transaksi</title>
+    <title>Accounts</title>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/stylesheets/riwayat.css">
+    <link rel="stylesheet" href="/stylesheets/akun.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
 
 </head>
@@ -88,50 +88,37 @@
     <div class="card">
 
         <div class="card-body card-color">
-            <h5 class="card-title">Riwayat Transaksi</h5>
+            <h5 class="card-title">Accounts</h5>
             <div class="hr-horizontal"></div>
             <div class="search-container">
                 <div class="search-box">
                     <i class='bx bx-search icon'></i>
                     <input type="text" id="searchInput" placeholder="Search.." />
                 </div>
+                
+                <div class="info-barang">
+                    <button><i class='bx bx-plus'></i><a style="color: black; text-decoration: none;" href="/admin/create-users">Tambah Akun</a></button>
+                </div>
             </div>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID Transaksi</th>
-                        <th scope="col">Nama Kasir</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Waktu</th>
-                        <th scope="col">Total Harga</th>
-                        <th scope="col">Bayar</th>
-                        <th scope="col">Kembali</th>
-                        <th scope="col">Nama Barang</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Harga</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Opsi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for( let i = 0; i < salesData.length; i++ ) { %>
+                    <% for( let i = 0; i < data.length; i++ ) { %>
                         <tr>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_id %></td>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].username %></td>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_date %></td>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_time %></td>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].total_price %></td>
-                            <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].payment %></td>
-                            <td class="bordered-cell" rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].return_payment %></td>
-                            <td><%= salesData[i].detail[0].product_name %></td>
-                            <td><%= salesData[i].detail[0].amount_product %></td>
-                            <td><%= salesData[i].detail[0].price %></td>
+                            <td><%= data[i].id_user %></td>
+                            <td><%= data[i].username %></td>
+                            <td><%= data[i].level_user %></td>
+                            <td><a href="/admin/edit-users/<%= data[i].id_user %>" class="edit"><i class='bx bx-edit'></i></a>
+                                <a href="/admin/delete-users/<%= data[i].id_user %>" class="edit"><i class='bx bx-trash'></i></a>
+                            </td>
                         </tr>
-                        <% for( let j = 1; j < salesData[i].detail.length; j++ ) { %>
-                            <tr>
-                                <td><%= salesData[i].detail[j].product_name %></td>
-                                <td><%= salesData[i].detail[j].amount_product %></td>
-                                <td><%= salesData[i].detail[j].price %></td>
-                            </tr>
-                        <% } %>
                     <% } %>
                 </tbody>
             </table>

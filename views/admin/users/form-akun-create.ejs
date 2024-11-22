@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph</title>
+    <title>Tambah Akun</title>
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/stylesheets/grafik.css">
+    <link rel="stylesheet" href="/stylesheets/form-akun.css">
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
+
 <body>
-    
+
+    <!-- SIDEBAR -->
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -81,43 +83,35 @@
         </div>
     </nav>
     
-    <section class="card">
-
-        <div class="container-card">
-            <div class="chart-card">
-                <div class="jdl">
-                    <span>Analisis Penjualan Berdasarkan Bulan</span>
-                    <div class="hr-horizontals"></div>
-                    <input type="hidden" id="topSalesMonth" value="<%= salesData %>">
-                </div>
-                <canvas id="barchart" width="700" height="500"></canvas>
-            </div>
     
-            <div class="chart-card">
+<!-- BAGIAN isi -->
+    <div class="card">
+
+        <div class="cont-stok">
+            <form class="f-stok" action="/admin/store-users" method="post">
                 <div class="jdl">
-                    <span>Analisis Penjualan Berdasarkan Event</span>
-                    <div class="hr-horizontals"></div>
-                    <input type="hidden" id="topSalesEvent" value="<%= salesDataEvent %>">
+                    <span>Tambah Akun</span>
                 </div>
-                <canvas id="doughnut" width="700" height="500"></canvas>
-            </div>
-            
-            <div class="chart-card">
-                <div class="jdl">
-                    <span>Analisis Penjualan Berdasarkan Hari</span>
-                    <div class="hr-horizontals"></div>
-                    <input type="hidden" id="topSalesDay" value="<%= salesDataDay %>">
+                <div class="hr-horizontal"></div>
+
+                <div class="nama">
+                    <input placeholder="Username" name="username"></input>
                 </div>
-                <canvas id="myChart" width="700" height="500"></canvas>
-            </div>
+                <div class="Jumlah">
+                    <input placeholder="Password" name="password"></input>
+                </div>
+                <div class="Role">
+                    <input placeholder="Role" name="level_user"></input>
+                </div>
+                <div class="kirim">
+                    <button type="submit">Tambah</button>
+                </div>
+            </form>
         </div>
-        
-    </section>
 
-    <script src="/javascripts/chart1.js" defer></script>
-    <script src="/javascripts/chart2.js" defer></script>
-    <script src="/javascripts/chart3.js" defer></script>
+    </div>
 
-    <script src="/javascripts/script.js" defer></script>
+    <script src="/javascripts/script.js"></script>
+
 </body>
 </html>
