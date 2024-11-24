@@ -31,8 +31,10 @@ router.post(`/log`, async(req, res) => {
 
 router.get(`/logout`, (req, res) => {
   req.session.destroy(err => {
-    console.log(err)
-    if(err) return res.redirect(`/login`)
+    if(err) {
+      console.log(err)
+      return res.redirect(`/login`)
+    }
     res.redirect(`/login`)
   })
 })

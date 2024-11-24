@@ -16,7 +16,6 @@ let auth = async (req, res, next) => {
 router.use(auth);
 
 router.get(`/dashboard`, async (req, res) => {
-  let data = await Model_Users.getAll();
   res.render(`admin/dashboardadm`);
 });
 
@@ -37,7 +36,6 @@ router.post("/update-users/:id", async (req, res) => {
   let id_user = req.params.id;
   try {
     let { username, password, level_user } = req.body;
-    console.log(level_user)
     let data = { username, password, level_user };
     await Model_Users.updateUsers(data, id_user);
     res.redirect("/admin/users");
@@ -96,11 +94,12 @@ router.get(`/transaction-history`, async(req, res) => {
       salesData[i].detail[j].price = changeToRupiah(salesData[i].detail[j].price)
     }
   }
-  console.log(salesData)
   res.render(`admin/riwayat`, { salesData })
 })
 
 router.get(`/graph`, async(req, res) => {
+  let bestSellerDatas = await Model_Transaction_Detail.getBestSeller()
+
   let month = ["januari","februari","maret","april","mei","juni","juli","juli","agustus","september","oktober","november","desember"]
   let salesData = {}
   for (let i = 0; i < month.length; i++) {
@@ -119,12 +118,11 @@ router.get(`/graph`, async(req, res) => {
     salesDataDay[day[i]] = await Model_Transaction_Detail.getByDay(day[i]) || {product_name: "", amount: 0}
   }
 
-  console.log(salesDataDay)
-
   res.render(`admin/grafik`, {
     salesData: JSON.stringify(salesData),
     salesDataEvent: JSON.stringify(salesDataEvent),
-    salesDataDay: JSON.stringify(salesDataDay)
+    salesDataDay: JSON.stringify(salesDataDay),
+    bestSellerDatas: JSON.stringify(bestSellerDatas)
   })
 })
 

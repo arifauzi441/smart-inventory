@@ -1,8 +1,18 @@
-const data = {
-    labels: ['Produk A', 'Produk B', 'Produk C', 'Produk D', 'Produk E', 'Produk F'],
+const bestSellerDatas = document.getElementById(`bestSellerDatas`).value
+const bestSeller = JSON.parse(bestSellerDatas)
+
+const topProductsName = bestSeller.map(data => {
+    return data.product_name
+});
+const quantitySold = bestSeller.map(data => {
+    return data.sold
+});
+
+const data4 = {
+    labels: topProductsName,
     datasets: [{
         label: 'Penjualan Produk',
-        data: [85, 60, 70, 50, 95, 40],
+        data: quantitySold,
         backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -33,7 +43,7 @@ function adjustRadiusBasedOnData(ctx) {
 
 const config = {
     type: 'radar',
-    data: data,
+    data: data4,
     options: {
         plugins: {
         legend: {
@@ -54,7 +64,7 @@ const config = {
     scales: {
         r: {
             beginAtZero: true,
-            max: 100,
+            max: quantitySold[0],
             angleLines: {
             color: 'grey'
         },

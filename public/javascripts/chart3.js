@@ -5,9 +5,6 @@
     
     const topProducts = Object.values(data).map(item => {return item.product_name})
     const topSales = Object.values(data).map(item => {return item.amount})
-    console.log(data)
-    console.log(topProducts)
-    console.log(topSales)
     
     const data3 = {
         labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
