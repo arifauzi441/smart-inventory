@@ -26,7 +26,6 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
     if([`.jpg`, `.png`].includes(path.extname(file.originalname))){
-        console.log(path.extname(file.fieldname))
         cb(null, true)
     }else{
         cb(new Error(`Extensi tidak valid`), false)
@@ -71,10 +70,7 @@ router.get(`/input-product`, async(req, res) => {
 router.post(`/save-product`, upload.single(`product_image`), async(req, res) => {
     let {product_name, product_price, product_stock, product_minimum_stock} = req.body
     try {
-        if(!req.file){
-            console.log(req.file)
-            return res.redirect(`/supplier/input-product`)
-        } 
+        if(!req.file) return res.redirect(`/supplier/input-product`)
         let product_image = `/images/produk-images/${req.file.filename}`
 
         let data = {product_name, product_price, product_stock, product_minimum_stock, product_image}

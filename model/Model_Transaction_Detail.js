@@ -61,6 +61,16 @@ class Model_Transaction_Detail{
         })
     }
 
+    static getBestSeller(){
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT p.product_name, sum(t.amount_product) as sold FROM 
+                transaction_detail t join product p on t.product_id = p.product_id 
+                group by p.product_id order by sold desc limit 5`, (err, rows) => {
+                if(err) return reject(err)
+                resolve(rows)
+            })
+        })
+    }
 }
 
 module.exports = Model_Transaction_Detail
