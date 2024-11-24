@@ -583,3 +583,64 @@ nav {
     font-size: 14px;
     color: #ffffff;
 }
+
+
+.select-menu{
+    color: grey;
+    position: relative;
+}
+.select-menu .select-btn{
+    display: flex;
+    width: 14rem;
+    height: 40px;
+    background: #f5f5f5;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 20px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.select-btn i{
+    font-size: 25px;
+    transition: 0.3s;
+}
+.select-menu.active .select-btn i{
+    transform: rotate(-180deg);
+}
+.select-menu .options{
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    display: none;
+}
+.select-menu.active .options{
+    display: block;
+}
+.options .option{
+    display: flex;
+    height: 45px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: #f5f5f5;
+}
+.options .option:hover{
+    background: #e7e6e6;
+}
+.option i{
+    font-size: 25px;
+    margin-right: 12px;
+}
+.option .option-text{
+    font-size: 18px;
+    color: #333;
+}
