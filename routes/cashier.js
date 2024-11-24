@@ -13,7 +13,7 @@ let auth = async (req, res, next) => {
     if(req.session.userId){
         let user = await Model_Users.getUserById(req.session.userId)
         if(user.level_user === `cashier`) return next()
-        res.redirect(`/login`)
+        return res.redirect(`/login`)
     }
     res.redirect(`/login`)
 }
@@ -41,14 +41,14 @@ router.get(`/POS`, async(req, res) => {
 })
 
 router.post(`/transaction`, async(req, res) => {
-    let {product_id, price, amount_product, id_user, total_price, payment} = req.body
+    let {product_id, price, amount_product, id_user, total_price, payment, transaction_event} = req.body
     try {
         let cashier_id = id_user
         let return_payment = payment - total_price
 
         let caseStatement = '';
         let data = [];
-        if(product_id.length > 1){
+        if(product_id instanceof Array){
             product_id.forEach((product_id, index) => {
                 caseStatement += 'WHEN product_id = ? && product_stock >= ? THEN product_stock - ?'
                 data.push(product_id, amount_product[index], amount_product[index]);
@@ -78,7 +78,7 @@ router.post(`/transaction`, async(req, res) => {
             transaction_date, 
             transaction_time, 
             cashier_id, 
-            "none",
+            transaction_event,
             total_price,
             payment,
             `${return_payment}` 
@@ -87,7 +87,7 @@ router.post(`/transaction`, async(req, res) => {
 
         let transaction_id = await Model_Transaction.getNewestId()
         let Detaildata = []
-        if(product_id.length > 1){
+        if(product_id instanceof Array){
             Detaildata = product_id.map((product_id, index) => [amount_product[index], price[index], product_id, transaction_id])
         }else{
             Detaildata = [[amount_product, price, product_id, transaction_id]]
@@ -121,7 +121,6 @@ router.get(`/nota/:id`, async(req, res) => {
             transaction.detail[j].price = changeToRupiah(transaction.detail[j].price)
             transaction.detail[j].product_price = changeToRupiah(transaction.detail[j].product_price)
         }
-        console.log(transaction)
         
         res.render(`cashier/nota`, {transaction})
     } catch (error) {
