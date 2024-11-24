@@ -10,7 +10,7 @@ let auth = async (req, res, next) => {
     if(req.session.userId){
         let user = await Model_Users.getUserById(req.session.userId)
         if(user.level_user === `supplier`) return next()
-        res.redirect(`/login`)
+        return res.redirect(`/login`)
     }
     res.redirect(`/login`)
 }

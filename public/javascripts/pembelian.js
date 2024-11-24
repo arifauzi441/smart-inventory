@@ -2,7 +2,8 @@ const produkKotak = document.querySelectorAll('.kotak');
 const formAtas = document.querySelector('.form-atas');
 const formBawah = document.querySelector('.form-bawah');
 const rekomendasi = document.querySelector('.rekemendasi');
-
+const payment = document.querySelector(`.inp-byr`)
+const paymentButton = document.querySelector(`.bgn-tombol button`)
 // Variabel untuk menyimpan total jumlah barang dan total harga
 let totalJumlahBarang = 0;
 let totalHarga = 0;
@@ -11,6 +12,7 @@ produkKotak.forEach(kotak => {
     kotak.addEventListener('click', () => {
         const bgnInput = document.createElement('div');
         bgnInput.classList.add('bgn-input');
+        paymentButton.disabled = false
 
         // Ambil informasi produk dari kotak yang diklik
         const judulProduk = kotak.querySelector('.ket-jdl').textContent;
@@ -33,10 +35,9 @@ produkKotak.forEach(kotak => {
             <div class="isi-input-bawah">
                 <span class="hrg">Rp ${hargaProduk}</span>
                 <input class="price" type="hidden" name="price" value="${hargaProduk}">
-                <input class="inp-jml" type="number" min="0" max="${product_stock}" name="amount_product" placeholder="Input Jumlah">
+                <input class="inp-jml" type="number" min="1" max="${product_stock}" value="1" name="amount_product" placeholder="Input Jumlah" required>
             </div>
         `;
-
         formAtas.appendChild(bgnInput);
         formBawah.classList.add('aktif');
         rekomendasi.classList.add('aktif');
@@ -76,6 +77,7 @@ produkKotak.forEach(kotak => {
             // Update total harga di .hrg-total
             hrgTotal.textContent = `Rp ${totalHarga.toLocaleString()}`;
             hrgTotalPrice.value = totalHarga
+            payment.min = totalHarga
 
             // Update jumlah barang yang dibeli
             totalJumlahBarang = totalJumlahBarang - previousJumlah + jumlah;
@@ -87,6 +89,9 @@ produkKotak.forEach(kotak => {
             previousJumlah = jumlah;
         });
 
+        const event = new Event("input", { bubbles: true });
+        inpJml.dispatchEvent(event)
+
         // Ambil tombol X
         const hapusBtn = bgnInput.querySelector('.hapus-btn');
 
@@ -96,27 +101,30 @@ produkKotak.forEach(kotak => {
 
             // Ambil elemen input yang ingin dihapus
             const inputElement = bgnInput.querySelector('.inp-jml');
-
+            
             if (inputElement) {
                 // Ambil nilai jumlah input sebelum dihapus
                 const jumlahInput = parseInt(inputElement.value) || 0;
-
+                
                 // Kurangi total harga dan jumlah barang berdasarkan input yang dihapus
                 totalHarga -= jumlahInput * hargaProduk;
                 hrgTotal.textContent = `Rp ${totalHarga.toLocaleString()}`;
-
+                
                 totalJumlahBarang -= jumlahInput;
                 jmlhBrg.textContent = totalJumlahBarang;
-
+                
                 // Hapus elemen input (input yang terkait)
                 bgnInput.remove();
-
+                
                 // Periksa jika tidak ada input lagi di form-atas
                 if (formAtas.querySelectorAll('.bgn-input').length === 0) {
                     formAtas.classList.remove('aktif'); // Sembunyikan form atas
                     rekomendasi.classList.remove('aktif'); // Sembunyikan rekomendasi
                 }
             }
+            if(formAtas.innerHTML == ` `){
+                paymentButton.disabled = true
+            } 
         });
     });
 });
@@ -124,7 +132,8 @@ produkKotak.forEach(kotak => {
 const optionMenu = document.querySelector(".select-menu"),
     selectBtn = optionMenu.querySelector(".select-btn"),
     options = optionMenu.querySelectorAll(".option"),
-    sBtn_text = optionMenu.querySelector(".sBtn-text");
+    sBtn_text = optionMenu.querySelector(".sBtn-text"),
+    eventSelect = document.querySelector(`.event-select`)
 
 selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
 
@@ -132,6 +141,7 @@ options.forEach(option =>{
     option.addEventListener("click", ()=>{
         let selectedOption = option.querySelector(".option-text").innerText;
         sBtn_text.innerText = selectedOption;
+        eventSelect.value = sBtn_text.innerText.toLowerCase()
 
         optionMenu.classList.remove("active");
     });
