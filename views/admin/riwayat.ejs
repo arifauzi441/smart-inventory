@@ -87,6 +87,69 @@
 <!-- BAGIAN isi -->
     <div class="card">
 
+    <!-- detail barang -->
+    <section class="cont-stok" id="modalForm">
+        <div class="f-stok">
+            <div class="jdl">
+                <span>Detail Pembelian<a href="">3123522001</a></span>
+                <button type="button" class="close-form" id="closeForm" title="Close">X</button>
+            </div>
+            <div class="hr-horizontal"></div>
+            <div class="deks">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama Barang</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Total Harga</th>
+                            <th scope="col">Bayar</th>
+                            <th scope="col">Kembali</th>
+                            <th scope="col">Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Indomie</td>
+                            <td>30</td>
+                            <td>Rp 30000</td>
+                            <td>Rp 50000</td>
+                            <td>Rp 20000</td>
+                            <td>Rp 50000</td>
+                        </tr>
+
+                        <tr>
+                            <td>Indomie</td>
+                            <td>30</td>
+                            <td>Rp 30000</td>
+                            <td>Rp 50000</td>
+                            <td>Rp 20000</td>
+                            <td>Rp 50000</td>
+                        </tr>
+
+                        <tr>
+                            <td>Indomie</td>
+                            <td>30</td>
+                            <td>Rp 30000</td>
+                            <td>Rp 50000</td>
+                            <td>Rp 20000</td>
+                            <td>Rp 50000</td>
+                        </tr>
+
+                        <tr>
+                            <td>Indomie</td>
+                            <td>30</td>
+                            <td>Rp 30000</td>
+                            <td>Rp 50000</td>
+                            <td>Rp 20000</td>
+                            <td>Rp 50000</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
         <div class="card-body card-color">
             <h5 class="card-title">Riwayat Transaksi</h5>
             <div class="hr-horizontal"></div>
@@ -103,15 +166,48 @@
                         <th scope="col">Nama Kasir</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Waktu</th>
-                        <th scope="col">Total Harga</th>
-                        <th scope="col">Bayar</th>
-                        <th scope="col">Kembali</th>
-                        <th scope="col">Nama Barang</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Harga</th>
+                        <th scope="col">Detail Pembelian</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    <tr>
+                        <td>3123522001</td>
+                        <td>Danang</td>
+                        <td>2024-05-12</td>
+                        <td>12:04:23</td>
+                        <td>
+                            <a href="#" class="edit open-modal">
+                                <i class="bx bx-error-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3123522001</td>
+                        <td>Danang</td>
+                        <td>2024-05-12</td>
+                        <td>12:04:23</td>
+                        <td>
+                            <a href="#" class="edit open-modal">
+                                <i class="bx bx-error-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3123522001</td>
+                        <td>Danang</td>
+                        <td>2024-05-12</td>
+                        <td>12:04:23</td>
+                        <td>
+                            <a href="#" class="edit open-modal">
+                                <i class="bx bx-error-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+
                     <% for( let i = 0; i < salesData.length; i++ ) { %>
                         <tr>
                             <td rowspan="<%= salesData[i].detail.length %>"><%= salesData[i].transaction_id %></td>
@@ -139,6 +235,7 @@
     </div>
 
     <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/riwayat.js"></script>
 
 </body>
 </html>

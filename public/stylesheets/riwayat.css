@@ -347,3 +347,65 @@ body{
     padding-right: 35px;
     font-size: 16px;
 }
+
+
+
+
+.f-stok {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.jdl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+.jdl a {
+    color: #FFD700; 
+    text-decoration: none; 
+    font-weight: 500;
+    font-size: 16px; 
+    margin-left: 10px;
+}
+
+.close-form {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#modalForm {
+    position: fixed;
+    top: 50%;
+    left: calc(50% + 42.5px); 
+    transform: translate(-50%, -50%);
+    background-color: #2D3A43;
+    padding: 20px;
+    border-radius: 8px;
+    width: calc(100% - 100px); 
+    max-width: 900px;
+    border: 1px solid black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 222;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#modalForm.show {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    #modalForm {
+        width: 95%; 
+        max-width: none;
+    }
+}
