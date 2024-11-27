@@ -13,6 +13,9 @@
             margin: 0; /* Hilangkan margin default */
             padding: 0; /* Hilangkan padding default */
           }
+          .message{
+            visibility: hidden;
+          }
           .nota {
             width: 80mm; /* Sesuaikan lebar nota dengan ukuran kertas */
             margin: auto; /* Pusatkan elemen */
@@ -31,7 +34,12 @@
 </head>
 
 <body>
-    
+    <% if (messages.success) { %>
+        <div class="message" style="width: 40%; height: 50px; text-align: center; line-height: 50px; background-color: aliceblue; margin: 10px auto; font-weight:500; border-radius: 30px;"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+        <div class="message" style="width: 40%; height: 50px; text-align: center; line-height: 50px; background-color: #FF0000; margin: 10px auto; font-weight:500; border-radius: 30px;"><%= messages.error %></div>
+    <% } %>
 <!-- BAGIAN isi -->
     <div class="card">
 

@@ -10,6 +10,22 @@ class Model_Product{
         })
     }
 
+    static getBySearch(search){
+        return new Promise((resolve, reject) => {
+            let data = []
+            for (let i = 0; i < 7; i++) {
+                data.push(`%${search}%`)
+            }
+            db.query(`select * from product 
+                where product_name like ? OR product_price like ?
+                OR product_stock like ? OR product_minimum_stock like ?
+                OR product_id like ?`, data, (err, rows) => {
+                if(err) reject(err)
+                resolve(rows)
+            })
+        })
+    }
+
     static storeProduct(data){
         return new Promise((resolve, reject) => {
             db.query(`insert into product set ?`, [data], (err, rows) => {

@@ -2,6 +2,7 @@
 const modalForm = document.getElementById('modalForm');
 const openIcons = document.querySelectorAll('.plus-icon');
 const closeFormButton = document.getElementById('closeForm');
+const searchInput = document.getElementById(`searchInput`)
 
 // Fungsi untuk menampilkan modal
 function openModal() {
@@ -28,4 +29,16 @@ function openModal(id) {
 
 function closeModal() {
     modalForm.classList.remove('show');
+}
+
+searchInput.addEventListener(`input`, function (){
+    setTimeout(() => {
+        document.getElementById(`searchForm`).submit()
+    }, 1000);
+})
+
+window.onload = function(){
+    searchInput.focus()
+    const length = searchInput.value.length;
+    searchInput.setSelectionRange(length, length)
 }

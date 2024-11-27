@@ -45,8 +45,14 @@ router.get(`/dashboard`, async(req, res) => {
 })
 
 router.get(`/product`, async(req, res) => {
-    let product = await Model_Product.getProduct()
     let productLowStock = await Model_Product.getProductByStock()
+    let searchData = req.query.search || ``
+    let product = []
+    if(searchData !== ``){
+        product = await Model_Product.getBySearch(searchData);
+    } else{
+        product = await Model_Product.getProduct();
+    }
 
     product.forEach(p => {
         p.product_price = new Intl.NumberFormat("id-ID", {
@@ -54,9 +60,11 @@ router.get(`/product`, async(req, res) => {
             currency: "IDR"
         }).format(p.product_price)
     });
+
     let notification = "available"
     if(productLowStock.length === 0) notification = "not available"
-    res.render(`supplier/input-stok-sup/stok`, {product, notification})
+    
+    res.render(`supplier/input-stok-sup/stok`, {product, notification, searchData})
 })
 
 router.get(`/input-product`, async(req, res) => {
