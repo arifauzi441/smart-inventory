@@ -139,7 +139,9 @@
 
                             <div class="search-box">
                                 <i class='bx bx-search icon'></i>
-                                <input type="text" id="searchInput" placeholder="Search.." />
+                                <form action="/cashier/POS" id="searchForm" method="get">
+                                    <input type="text" id="searchInput" name="search" placeholder="Search.." value="<%= search %>"/>
+                                </form>
                             </div>
                         </div>
 

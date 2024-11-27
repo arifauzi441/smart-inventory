@@ -25,7 +25,9 @@ router.get(`/dashboard`, async (req, res) => {
 })
 
 router.get(`/POS`, async(req, res) => {
-    let product = await Model_Product.getProduct()
+    let search = req.query.search || ``
+    let product = search === `` ? await Model_Product.getProduct() : await Model_Product.getBySearch(search)
+    
     let user = await Model_Users.getUserById(req.session.userId)
 
     for (let i = 0; i < product.length; i++) {
@@ -37,7 +39,7 @@ router.get(`/POS`, async(req, res) => {
         product[i].pair = await Model_Product.getProductPair(product[i].product_id)
     }
 
-    res.render(`cashier/pembelian`, {product, user})
+    res.render(`cashier/pembelian`, {product, user, search})
 })
 
 router.post(`/transaction`, async(req, res) => {
@@ -94,9 +96,11 @@ router.post(`/transaction`, async(req, res) => {
         }
         await Model_Transaction_Detail.insertDetail(Detaildata)
 
+        req.flash(`success`, `Transaksi berhasil`)
         res.redirect(`/cashier/nota/${transaction_id}`)
     } catch (error) {
         console.log(error)
+        req.flash(`error`, `Transaksi gagal`)
         res.redirect(`/cashier/POS`)
     }
 })

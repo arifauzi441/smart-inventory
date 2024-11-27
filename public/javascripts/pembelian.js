@@ -4,6 +4,7 @@ const formBawah = document.querySelector('.form-bawah');
 const rekomendasi = document.querySelector('.rekemendasi');
 const payment = document.querySelector(`.inp-byr`)
 const paymentButton = document.querySelector(`.bgn-tombol button`)
+const searchInput = document.getElementById(`searchInput`)
 // Variabel untuk menyimpan total jumlah barang dan total harga
 let totalJumlahBarang = 0;
 let totalHarga = 0;
@@ -146,3 +147,15 @@ options.forEach(option =>{
         optionMenu.classList.remove("active");
     });
 });
+
+searchInput.addEventListener(`input`, function(){
+    setTimeout(() => {
+        document.getElementById(`searchForm`).submit()
+    }, 1000)
+})
+
+window.onload = function(){
+    searchInput.focus()
+    const length = searchInput.value.length
+    searchInput.setSelectionRange(length, length)
+}

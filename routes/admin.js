@@ -73,7 +73,14 @@ router.get(`/delete-users/:id`, async (req, res) => {
 });
 
 router.get(`/transaction-history`, async(req, res) => {
-  let salesData = await Model_Transaction.getAll();
+  let data = req.query.search || ``
+  let salesData = []
+
+  if(data !== ``){
+    salesData = await Model_Transaction.getBySearch(data);
+  } else{
+    salesData = await Model_Transaction.getAll();
+  }
 
   function changeToRupiah(data){
     return new Intl.NumberFormat("id-ID", {
@@ -94,7 +101,7 @@ router.get(`/transaction-history`, async(req, res) => {
       salesData[i].detail[j].price = changeToRupiah(salesData[i].detail[j].price)
     }
   }
-  res.render(`admin/riwayat`, { salesData })
+  res.render(`admin/riwayat`, { salesData, data })
 })
 
 router.get(`/graph`, async(req, res) => {
